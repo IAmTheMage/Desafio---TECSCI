@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Plant {
+  id         Int       @id @default(autoincrement())
+  name       String
+  location   String
+  createdAt  DateTime  @default(now())
+  inverters  Inverter[]
+}
+
+model Inverter {
+  id          Int       @id @default(autoincrement())
+  model       String
+  capacityKW  Float
+  installedAt DateTime  @default(now())
+  plantId     Int
+  plant       Plant     @relation(fields: [plantId], references: [id])
+  metrics     Metric[]
+}
+
+model Metric {
+  id           Int       @id @default(autoincrement())
+  timestamp    DateTime
+  activePowerW Float
+  temperatureC Float
+  inverterId   Int
+  inverter     Inverter  @relation(fields: [inverterId], references: [id])
+
+  @@index([timestamp])
+  @@index([inverterId, timestamp])
+}

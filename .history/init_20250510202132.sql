@@ -1,0 +1,1 @@
+CREATE DATABASE monitoramento_usina_teste;
