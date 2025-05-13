@@ -1,1 +1,0 @@
-docker exec -it postgres_container psql -U gustavo -d monitoramento_usina -f /docker-entrypoint-initdb.d/init.sql

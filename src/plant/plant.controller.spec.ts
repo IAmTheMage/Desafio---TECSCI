@@ -18,13 +18,16 @@ describe('PlantController', () => {
     controller = module.get<PlantController>(PlantController);
     service = module.get<PlantService>(PlantService);
     prisma = module.get<PrismaService>(PrismaService);
-
-    await prisma.$connect();
-    await prisma.plant.deleteMany(); // limpa a tabela antes dos testes
   });
 
+  beforeEach(async () => {
+    await prisma.$connect();
+    await prisma.plant.deleteMany();
+    
+  })
+
   afterAll(async () => {
-    await prisma.plant.deleteMany(); // limpa a tabela após os testes
+    await prisma.plant.deleteMany(); 
     await prisma.$disconnect();
   });
 
@@ -38,8 +41,6 @@ describe('PlantController', () => {
       const plantCreated = await controller.create(dto);
 
       expect(plantCreated).toBe(true)
-
-      
     });
   });
 });
