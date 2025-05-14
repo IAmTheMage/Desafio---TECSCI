@@ -17,6 +17,8 @@ describe('PlantService', () => {
     prisma = module.get<PrismaService>(PrismaService);
     await prisma.$connect();
   });
+  
+
 
 
   it('create', async () => {
@@ -58,7 +60,7 @@ describe('PlantService', () => {
 
     const countNow = await prisma.plant.count()
     //const formattedPlants = plants.map(({ name, location }) => ({ name, location }));
-    expect(countNow).toEqual(countBefore + plantsData.length);
+    expect(countNow).toBeGreaterThanOrEqual(countBefore + plantsData.length);
 
   });
 

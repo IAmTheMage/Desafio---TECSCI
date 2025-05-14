@@ -18,8 +18,11 @@ export class SeedService implements OnModuleInit {
   }
 
   async onModuleInit() {
+    await this.seed();
+  }
+
+  async seed() {
     await this.seedPlants();
-    await this.seedMetrics();
   }
 
   async seedPlants() {
@@ -47,14 +50,14 @@ export class SeedService implements OnModuleInit {
     const plantsExist = plantsToSeed.every(p => !!plantIds[p.name]);      // Todas existem
   
     if (plantsExist) {
-      const usina1Id = plantIds["Usina 1"];
-      const usina2Id = plantIds["Usina 2"];
+      const plant1Id = plantIds["Usina 1"];
+      const plant2Id = plantIds["Usina 2"];
       const invertersExist = await this.prisma.inverter.findFirst({
-        where: { plantId: { in: [usina1Id, usina2Id] } }
+        where: { plantId: { in: [plant1Id, plant2Id] } }
       });
   
       if (!invertersExist) {
-        await this.seedInverters(usina1Id, usina2Id);
+        await this.seedInverters(plant1Id, plant2Id);
       } else {
         this.logger.log("Inverters already exist. Skipping seedInverters.");
       }
@@ -75,31 +78,41 @@ export class SeedService implements OnModuleInit {
       { model: "Inversor B4", capacityKW: 85, plantId: plant2Id }
     ];
   
-    await this.prisma.inverter.createMany({
-      data: inverterData,
-      skipDuplicates: true
-    });
+    const createdInverters = await Promise.all(
+      inverterData.map(data =>
+        this.prisma.inverter.create({
+          data,
+        })
+      )
+    );
+
+    const inverterIds = createdInverters.map(inv => inv.id);
+    await this.seedMetrics(inverterIds)
   
     this.logger.log("Inverters created successfully.");
   }
   
 
-  async seedMetrics() {
-    /*try {
+  async seedMetrics(invertersIds: number[]) {
+    try {
       const filePath = path.join(__dirname, '../../data/metrics.json');
       const rawData = fs.readFileSync(filePath, 'utf-8');
       const metrics = JSON.parse(rawData);
 
-      const records = metrics.map((item) => ({
-        timestamp: new Date(item.datetime["$date"]),
-        activePowerW: item.potencia_ativa_watt,
-        temperatureC: item.temperatura_celsius,
-        inverterId: item.inversor_id,
-      }));
+      const records = metrics.map((item) => {
+        const inversorId =  invertersIds[item.inversor_id - 1]
+        return {
+          timestamp: new Date(item.datetime["$date"]),
+          activePowerW: item.potencia_ativa_watt ? item.potencia_ativa_watt : 0,
+          temperatureC: item.temperatura_celsius ? item.temperatura_celsius : 0,
+          inverterId: inversorId,
+        }
+      });
 
       // Dividir em lotes para evitar sobrecarga
       const chunkSize = 1000;
       for (let i = 0; i < records.length; i += chunkSize) {
+        this.logger.log(`Inserting data ${i}:${i+chunkSize} of ${metrics.length}`)
         const chunk = records.slice(i, i + chunkSize);
         await this.prisma.metric.createMany({ data: chunk, skipDuplicates: true });
       }
@@ -107,6 +120,6 @@ export class SeedService implements OnModuleInit {
       this.logger.log(`Seed finalizado com ${records.length} registros.`);
     } catch (err) {
       this.logger.error('Erro ao importar dados JSON', err);
-    }*/
+    }
   }
 }

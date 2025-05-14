@@ -18,6 +18,7 @@ describe('InverterService', () => {
     await prisma.$connect();
   });
 
+
   it('create', async () => {
     const plant = await prisma.plant.create({
       data: { name: "Usina A", location: "Location A" }
