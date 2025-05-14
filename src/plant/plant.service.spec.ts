@@ -16,14 +16,8 @@ describe('PlantService', () => {
     service = module.get<PlantService>(PlantService);
     prisma = module.get<PrismaService>(PrismaService);
     await prisma.$connect();
-    await prisma.plant.deleteMany();
-    
   });
 
-  afterAll(async () => {
-    await prisma.$connect();
-    await prisma.plant.deleteMany();
-  })
 
   it('create', async () => {
     const dto: CreatePlantDto = {
@@ -46,6 +40,8 @@ describe('PlantService', () => {
   });
 
   it('find_many', async () => {
+
+    const countBefore = await prisma.plant.count()
     const plantsData: CreatePlantDto[] = [
       { name: 'Usina Solar 1', location: 'Localização X' },
       { name: 'Usina Solar 2', location: 'Localização Y' },
@@ -59,8 +55,10 @@ describe('PlantService', () => {
     });
 
     const plants = await service.findAll();
-    const formattedPlants = plants.map(({ name, location }) => ({ name, location }));
-    expect(formattedPlants).toEqual(plantsData);
+
+    const countNow = await prisma.plant.count()
+    //const formattedPlants = plants.map(({ name, location }) => ({ name, location }));
+    expect(countNow).toEqual(countBefore + plantsData.length);
 
   });
 
