@@ -1,98 +1,155 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# ⚡ Monitoramento de Usinas — STEMIS TECSCI
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Sistema desenvolvido em **TypeScript** com o framework **NestJS** para monitoramento de usinas.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🚀 Tecnologias Utilizadas
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- 🧠 **NestJS** — Framework para construção de aplicações escaláveis com Node.js
+- 🛢️ **PostgreSQL** — Banco de dados relacional
+- 🔄 **Prisma ORM** — Mapeamento objeto-relacional com foco em produtividade
+- 🐋 **Docker & Docker Compose** — Para ambiente de banco de dados
+- 🧪 **Jest** — Framework de testes
 
-## Project setup
+---
 
-```bash
-$ npm install
-```
+## 🤔 Por que essas escolhas?
 
-## Compile and run the project
+### ✅ NestJS
 
-```bash
-# development
-$ npm run start
+NestJS fornece:
 
-# watch mode
-$ npm run start:dev
+- Arquitetura opinativa ➜ mais **organização** e **padronização**
+- Produtividade em equipes grandes
+- Melhor equilíbrio entre **flexibilidade** e **estrutura**
 
-# production mode
-$ npm run start:prod
-```
+🔎 Diferente de microframeworks como Express/Fastify, o NestJS ajuda a manter **consistência no código**.  
+🔧 Não foi usado Django ou AdonisJS por serem mais rígidos ou terem menor comunidade (caso do AdonisJS).
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+### ✅ Prisma ORM
 
-# e2e tests
-$ npm run test:e2e
+- Geração automática de tipos TypeScript
+- **Autocompletar** e **validação** durante o desenvolvimento
+- Simples, moderno e com boa documentação
 
-# test coverage
-$ npm run test:cov
-```
+---
 
-## Deployment
+### ✅ PostgreSQL
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- Banco de dados robusto, maduro e bem suportado
+- Compatível com todo o ecossistema Node.js
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+---
+
+## 🛠️ Como usar o sistema?
+
+### 1. Instale o Node.js (v21.4.0)
+
+> ⚠️ O sistema foi testado com Node v21.4.0. Use essa versão para evitar incompatibilidades.
+
+#### 🔧 Linux (Ubuntu/Debian)
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+source "$NVM_DIR/nvm.sh"
+nvm install 21.4.0
+nvm use 21.4.0
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+#### 🪟 Windows
 
-## Resources
+Baixe e instale via site oficial:  
+👉 [Baixar Node.js](https://nodejs.org/en/download)
 
-Check out a few resources that may come in handy when working with NestJS:
+---
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### 2. Clone o repositório
 
-## Support
+```bash
+git clone <url-do-repositorio>
+cd <nome-do-diretorio>
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+### 3. Instale as dependências
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+npm install
+```
 
-## License
+Instale também a CLI do Prisma (se necessário):
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+npm install prisma --save-dev
+```
+
+---
+
+## 🐳 Usando Docker Compose
+
+Você pode usar o Docker para subir o banco de dados automaticamente:
+
+### Requisitos
+
+- Docker `v26.1.3`
+- Docker Compose instalado
+
+### ⚙️ Instalação do Docker
+
+- 🔗 [Instalação no Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+- 🔗 [Instalação no Windows](https://www.docker.com/products/docker-desktop/)
+
+### 🧱 Subindo o banco de dados
+
+```bash
+sudo docker-compose up --build
+```
+
+Depois, copie o arquivo `.env.sample` e configure seu `.env`:
+
+```bash
+cp .env.sample .env
+```
+
+---
+
+### 📦 Migrando o banco
+
+```bash
+npx prisma migrate dev --name init
+# ou
+npm run migrate
+```
+
+---
+
+### ▶️ Rodando o projeto
+
+```bash
+npm run start
+```
+
+Quando o projeto for executado a primeira ele irá automáticamente pegar os dados de metrics.json e adicionar no banco selecionado
+
+Acesse: [http://localhost:3000/api](http://localhost:3000/api)  
+🔍 Documentação da API disponível via Swagger!
+
+---
+
+## 🧪 Rodando os testes
+
+Configure o ambiente de testes com `.env.test` (um exemplo já está disponível).
+
+```bash
+npm run test
+```
+
+✅ O sistema possui:
+- 8 suites de testes
+- 26 testes no total  
+✅ **Alta cobertura das funcionalidades principais**
