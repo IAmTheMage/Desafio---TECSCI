@@ -153,3 +153,9 @@ npm run test
 - 8 suites de testes
 - 26 testes no total  
 ✅ **Alta cobertura das funcionalidades principais**
+
+Caso não funcione ou dê algum erro na execução você pode utilizar o comando:
+
+```
+npm run clean
+```
